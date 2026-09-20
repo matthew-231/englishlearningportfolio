@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The English Times — Matthew Kusnanto</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+:root {
+    --paper: #f4f0e7;
+    --paper-dark: #e7e0d2;
+
+    --ink: #171717;
+    --muted: #68645c;
+
+    /* MCU-inspired colors */
+    --accent: #9c2f24;
+    --marvel-red: #c62828;
+    --iron-gold: #d6a84f;
+    --arc-blue: #6ed6ff;
+    --shield-blue: #245c88;
+
+    --point: #b9d9f5;
+    --evidence: #f4df8b;
+    --explanation: #b9ddb8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =========================================================
+   MARVEL / MCU DETAILS
+========================================================= */
+
+/* Small glowing arc-reactor indicator */
+
+.arc-reactor {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    border: 2px solid var(--arc-blue);
+
+    box-shadow:
+        0 0 5px var(--arc-blue),
+        0 0 12px rgba(110,214,255,0.5),
+        inset 0 0 8px rgba(110,214,255,0.4);
+
+    position: relative;
+
+    animation: reactorPulse 3s infinite ease-in-out;
+}
+
+.arc-reactor::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 8px;
+    height: 8px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: var(--arc-blue);
+
+    box-shadow: 0 0 10px var(--arc-blue);
+}
+
+@keyframes reactorPulse {
+
+    0%, 100% {
+        box-shadow:
+            0 0 5px var(--arc-blue),
+            0 0 12px rgba(110,214,255,0.4);
+    }
+
+    50% {
+        box-shadow:
+            0 0 8px var(--arc-blue),
+            0 0 22px rgba(110,214,255,0.8);
+    }
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(244,240,231,0.94);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid #bbb4a7;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 5%;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-family: "DM Serif Display", serif;
+    font-size: 1.4rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -5px;
+    left: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--marvel-red);
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+
+/* =========================================================
+   HERO / COVER
+========================================================= */
+
+.hero {
+    min-height: 92vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 80px 8%;
+
+    border-bottom: 2px solid var(--ink);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* Subtle comic-book halftone */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    right: -120px;
+    top: 80px;
+
+    width: 420px;
+    height: 420px;
+
+    background-image:
+        radial-gradient(
+            rgba(198,40,40,0.12) 2px,
+            transparent 2px
+        );
+
+    background-size: 18px 18px;
+
+    transform: rotate(12deg);
+
+    pointer-events: none;
+}
+
+.issue {
+    font-family: "Oswald", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    color: var(--accent);
+
+    font-size: 0.85rem;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(4rem, 10vw, 9rem);
+
+    line-height: 0.82;
+
+    max-width: 1000px;
+}
+
+.hero-subtitle {
+    margin-top: 30px;
+
+    font-size: 1.25rem;
+
+    max-width: 600px;
+
+    color: var(--muted);
+}
+
+.hero-meta {
+    display: flex;
+
+    gap: 35px;
+
+    margin-top: 45px;
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.hero-number {
+    position: absolute;
+
+    right: -20px;
+    bottom: -70px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 25rem;
+
+    color: rgba(0,0,0,0.035);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   MCU STATUS STRIP
+========================================================= */
+
+.mcu-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 25px;
+
+    font-family: "Oswald", sans-serif;
+
+    font-size: 0.7rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: var(--muted);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #3fb950;
+
+    box-shadow: 0 0 8px rgba(63,185,80,0.8);
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+section {
+    padding: 100px 8%;
+
+    border-bottom: 1px solid #bbb4a7;
+}
+
+.section-header {
+    display: grid;
+
+    grid-template-columns: 100px 1fr;
+
+    gap: 30px;
+
+    margin-bottom: 55px;
+}
+
+.section-number {
+    font-family: "Oswald", sans-serif;
+
+    font-size: 1rem;
+
+    color: var(--accent);
+
+    font-weight: 600;
+}
+
+.section-title {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(3rem, 6vw, 5.5rem);
+
+    line-height: 0.95;
+}
+
+.section-description {
+    margin-top: 20px;
+
+    max-width: 650px;
+
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   EDITOR NOTE
+========================================================= */
+
+.editor-grid {
+    display: grid;
+
+    grid-template-columns: 1.3fr 0.7fr;
+
+    gap: 60px;
+}
+
+.editor-text {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 2rem;
+
+    line-height: 1.3;
+}
+
+.editor-text span {
+    color: var(--accent);
+}
+
+.journey {
+    border-left: 2px solid var(--ink);
+
+    padding-left: 30px;
+}
+
+.journey-item {
+    margin-bottom: 35px;
+}
+
+.journey-label {
+    font-family: "Oswald", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: var(--accent);
+
+    font-size: 0.8rem;
+}
+
+.journey-item h3 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 1.8rem;
+}
+
+
+/* =========================================================
+   ASSESSMENTS
+========================================================= */
+
+.assessment {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 60px;
+
+    align-items: start;
+}
+
+.assessment.reverse {
+    direction: rtl;
+}
+
+.assessment.reverse > * {
+    direction: ltr;
+}
+
+.assessment-info h3 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 3rem;
+
+    margin-bottom: 20px;
+}
+
+.label {
+    display: inline-block;
+
+    font-family: "Oswald", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 0.75rem;
+
+    color: white;
+
+    background: var(--accent);
+
+    padding: 6px 12px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   PDF ASSIGNMENT VIEWER
+========================================================= */
+
+.assignment-file {
+    border: 1px solid #aaa092;
+
+    background: #ddd6c9;
+
+    overflow: hidden;
+
+    box-shadow:
+        8px 8px 0 rgba(0,0,0,0.08);
+
+    position: relative;
+}
+
+.assignment-file::before {
+    content: "CLASSIFIED • STUDENT FILE";
+
+    display: block;
+
+    padding: 9px 15px;
+
+    background: var(--ink);
+
+    color: #fff;
+
+    font-family: "Oswald", sans-serif;
+
+    font-size: 0.7rem;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+}
+
+.assignment-file iframe {
+    width: 100%;
+
+    height: 600px;
+
+    border: none;
+
+    display: block;
+
+    background: white;
+}
+
+.pdf-caption {
+    padding: 12px 15px;
+
+    background: var(--paper-dark);
+
+    font-family: "Oswald", sans-serif;
+
+    font-size: 0.7rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: var(--muted);
+
+    border-top: 1px solid #aaa092;
+}
+
+.pdf-caption span {
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   PEE
+========================================================= */
+
+.pee {
+    margin-top: 35px;
+}
+
+.pee-row {
+    padding: 20px;
+
+    margin-bottom: 10px;
+}
+
+.pee-row strong {
+    display: block;
+
+    font-family: "Oswald", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+.point {
+    background: var(--point);
+}
+
+.evidence {
+    background: var(--evidence);
+}
+
+.explanation {
+    background: var(--explanation);
+}
+
+
+/* =========================================================
+   SPIDER-MAN — ASSESSMENT 1
+========================================================= */
+
+.assessment1-spiderman {
+    margin-top: 25px;
+
+    width: 100%;
+
+    height: 360px;
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+.assessment1-spiderman img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================================
+   REFLECTION
+========================================================= */
+
+.reflection {
+    margin-top: 50px;
+
+    border-top: 1px solid #aaa092;
+
+    padding-top: 30px;
+}
+
+.reflection h4 {
+    font-family: "Oswald", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 0.85rem;
+
+    color: var(--accent);
+
+    margin-bottom: 12px;
+}
+
+.quote {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 2rem;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin: 50px 0;
+}
+
+.process-step {
+    border: 1px solid var(--ink);
+
+    padding: 25px 30px;
+
+    text-align: center;
+
+    min-width: 140px;
+
+    position: relative;
+
+    transition: 0.3s;
+}
+
+.process-step:hover {
+    border-color: var(--marvel-red);
+
+    transform: translateY(-4px);
+
+    box-shadow: 4px 4px 0 var(--marvel-red);
+}
+
+.process-step strong {
+    font-family: "Oswald", sans-serif;
+
+    display: block;
+
+    text-transform: uppercase;
+}
+
+.arrow {
+    font-size: 1.5rem;
+
+    color: var(--marvel-red);
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-grid {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 15px;
+}
+
+.skill {
+    border-top: 3px solid var(--ink);
+
+    padding-top: 15px;
+}
+
+.skill-name {
+    font-weight: 700;
+
+    margin-bottom: 15px;
+}
+
+.stars {
+    font-size: 1.3rem;
+
+    letter-spacing: 3px;
+}
+
+.before {
+    color: #aaa;
+}
+
+.after {
+    color: var(--accent);
+}
+
+.skill small {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   PERSPECTIVES
+========================================================= */
+
+.perspective-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.perspective {
+    border: 1px solid var(--ink);
+
+    padding: 35px;
+
+    min-height: 300px;
+
+    transition: transform 0.3s;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.perspective:hover {
+    transform: translateY(-7px);
+
+    border-color: var(--marvel-red);
+}
+
+.perspective::after {
+    content: "";
+
+    position: absolute;
+
+    right: -35px;
+    bottom: -35px;
+
+    width: 90px;
+    height: 90px;
+
+    border: 2px solid rgba(198,40,40,0.12);
+
+    border-radius: 50%;
+}
+
+.perspective-icon {
+    font-size: 2rem;
+
+    margin-bottom: 25px;
+}
+
+.perspective h3 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 2rem;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   AVENGERS-STYLE DIVIDER
+========================================================= */
+
+.avengers-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 40px 0;
+}
+
+.avengers-divider::before,
+.avengers-divider::after {
+    content: "";
+
+    height: 1px;
+
+    background: var(--iron-gold);
+
+    flex: 1;
+}
+
+.avengers-symbol {
+    width: 34px;
+    height: 34px;
+
+    border: 2px solid var(--iron-gold);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: var(--iron-gold);
+
+    font-family: "Oswald", sans-serif;
+
+    font-weight: bold;
+
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final {
+    background: var(--ink);
+
+    color: var(--paper);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.final::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -180px;
+    top: -180px;
+
+    border: 2px solid rgba(214,168,79,0.15);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 30px rgba(214,168,79,0.03),
+        0 0 0 60px rgba(214,168,79,0.02);
+}
+
+.final .section-number {
+    color: #e06456;
+}
+
+.final .section-description {
+    color: #aaa;
+}
+
+.final-quote {
+    max-width: 1000px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(3rem, 7vw, 7rem);
+
+    line-height: 0.95;
+
+    margin: 70px 0;
+}
+
+.final-quote span {
+    color: #e06456;
+}
+
+.reflection-box {
+    max-width: 800px;
+
+    border-top: 1px solid #666;
+
+    padding-top: 30px;
+}
+
+.reflection-box h3 {
+    font-family: "Oswald", sans-serif;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #e06456;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background: var(--ink);
+
+    color: #aaa;
+
+    padding: 35px 8%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 0.75rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    border-top: 1px solid #333;
+}
+
+.footer-arc {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        min-height: 80vh;
+
+        padding: 60px 7%;
+    }
+
+    .hero h1 {
+        font-size: 4.5rem;
+    }
+
+    .hero-number {
+        font-size: 12rem;
+    }
+
+    section {
+        padding: 70px 7%;
+    }
+
+    .section-header {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .editor-grid,
+    .assessment,
+    .progress-grid,
+    .perspective-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .assessment.reverse {
+        direction: ltr;
+    }
+
+    .assignment-file iframe {
+        height: 450px;
+    }
+
+    .assessment1-spiderman {
+        height: 300px;
+    }
+
+    .process {
+        flex-direction: column;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+    }
+
+    footer {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav>
+
+    <div class="nav-logo">
+
+        <div class="arc-reactor"></div>
+
+        The English Times
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#journey">Journey</a>
+
+        <a href="#assessment1">
+            Circle of Viewpoints
+        </a>
+
+        <a href="#assessment2">
+            Media Bias Assessment
+        </a>
+
+        <a href="#assessment3">
+            Media Bias Presentation
+        </a>
+
+        <a href="#progress">
+            Progress
+        </a>
+
+        <a href="#final">
+            Final
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     COVER
+========================================================= -->
+
+<header class="hero">
+
+    <div class="issue">
+        Learning Portfolio • Issue 01 • 2026
+    </div>
+
+    <h1>
+        THE<br>
+        ENGLISH<br>
+        TIMES
+    </h1>
+
+    <p class="hero-subtitle">
+
+        The making of a better communicator —
+        three assessments, one learning journey,
+        and everything I discovered along the way.
+
+    </p>
+
+    <div class="hero-meta">
+
+        <span>
+            Matthew Kusnanto
+        </span>
+
+        <span>
+            Class 10.7
+        </span>
+
+        <span>
+            English
+        </span>
+
+    </div>
+
+    <div class="mcu-status">
+
+        <span class="status-dot"></span>
+
+        JARVIS STATUS: ONLINE • MISSION: ENGLISH
+
+    </div>
+
+    <div class="hero-number">
+        01
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     JOURNEY
+========================================================= -->
+
+<section id="journey">
+
+    <div class="section-header">
+
+        <div class="section-number">
+            00 / EDITOR'S NOTE
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                My Learning Journey
+            </h2>
+
+            <p class="section-description">
+
+                Before looking at my assessments,
+                I wanted to understand where I started,
+                what changed, and where I am now.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="editor-grid">
+
+        <div class="editor-text">
+
+            The truth isn't just what makes the headline,
+            it's what
+
+            <span>
+                never does.
+            </span>
+
+            <br><br>
+
+            Media framing is not just what the media
+            tells you to think about, but
+
+            <span>
+                how it encourages you to think about it.
+            </span>
+
+        </div>
+
+
+        <div class="journey">
+
+            <div class="journey-item">
+
+                <div class="journey-label">
+                    Before
+                </div>
+
+                <h3>
+                    What I thought
+                </h3>
+
+                <p>
+                    At the beginning, I thought that media bias meant that a news source gave false information. When seeing news, I only thought about whether the information was true or not rather than how the story was presented.
+                </p>
+
+            </div>
+
+
+            <div class="journey-item">
+
+                <div class="journey-label">
+                    During
+                </div>
+
+                <h3>
+                    What changed
+                </h3>
+
+                <p>
+                    Explain what activities,
+                    feedback, discussions or
+                    assessments changed your thinking.
+                </p>
+
+            </div>
+
+
+            <div class="journey-item">
+
+                <div class="journey-label">
+                    Now
+                </div>
+
+                <h3>
+                    What I can do
+                </h3>
+
+                <p>
+                    Now, I can identify media bias in different forms of media. I can examine language use, emotional appeal, visual footage and the source's credibility. This can help me make better judgements on the media I see.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="avengers-divider">
+
+        <div class="avengers-symbol">
+            A
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ASSESSMENT 1
+========================================================= -->
+
+<section id="assessment1">
+
+    <div class="section-header">
+
+        <div class="section-number">
+            01 / ASSESSMENT
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                My First Challenge
+            </h2>
+
+            <p class="section-description">
+
+                The first assessment shows where
+                my learning journey began.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <div class="assessment-info">
+
+            <span class="label">
+                Task 1
+            </span>
+
+            <h3>
+                Circle of Viewpoints
+            </h3>
+
+            <p>
+
+                How can media coverage shape different perspectives about the same event?
+
+            </p>
+
+
+            <div class="pee">
+
+                <div class="pee-row point">
+
+                    <strong>
+                        Point
+                    </strong>
+
+                    The BBC's coverage on Somalia can be viewed differently depending on which perspective sees it.
+
+                </div>
+
+
+                <div class="pee-row evidence">
+
+                    <strong>
+                        Evidence
+                    </strong>
+
+                    From the parent's perspective, the coverage focuses too much on catastrophe and overlooks the resilience of Somali people. From the reporter's perspective, dramatic and tense details such as “eight gunmen” are needed to show the danger and capture the audience’s attention. From the audience’s perspective, images of armed convoys and destroyed buildings create fear and sympathy, but may make Somalia seem like nothing but an endless warzone.
+
+                </div>
+
+
+                <div class="pee-row explanation">
+
+                    <strong>
+                        Explanation
+                    </strong>
+
+                    These three different viewpoints show that media coverage doesn't affect everyone the same way. The parent feels misrepresented, the reporter feels the responsibility to focus on danger to create dramatic news, and the audience can form a limited perception of Somalia. Therefore, different people and different perspectives can percieve the same news in different ways.
+
+                </div>
+
+            </div>
+
+
+            <div class="assessment1-spiderman">
+
+                <img
+                    src="spider man.png"
+                    alt="Spider-Man">
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <!--
+                ASSIGNMENT 1 PDF
+
+                Put "assignment1.pdf" in the same
+                folder as this HTML file.
+            -->
+
+            <div class="assignment-file">
+
+                <iframe
+                    src="Media%20Bias%20Investigation%20Somalia%20Case%20Study.pdf"
+                    title="Circle of Viewpoints">
+                </iframe>
+
+                <div class="pdf-caption">
+
+                    <span>
+                        TASK 1
+                    </span>
+
+                    — circleofviewpoints.pdf
+
+                </div>
+
+            </div>
+
+
+            <div class="reflection">
+
+                <h4>
+                    My Reflection
+                </h4>
+
+                <p>
+
+                    Doing this activity taught me how challenging it would be to understand an issue from other perspectives that are different from my own. When me and my team took on the role of parent, reporter and audience, we had to think about what each person would feel about BBC's coverage.
+
+                </p>
+
+                <br>
+
+                <p class="quote">
+
+                    "The story stays the same, but the perspective changes everything."
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ASSESSMENT 2
+========================================================= -->
+
+<section id="assessment2">
+
+    <div class="section-header">
+
+        <div class="section-number">
+            02 / ASSESSMENT
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                Behind the Scenes
+            </h2>
+
+            <p class="section-description">
+
+                This is the thinking process behind my answers, as I analyzed different aspects and layers of the single clip.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="process">
+
+        <div class="process-step">
+
+            <strong>
+                Language Use
+            </strong>
+
+            I noticed that the language used in the scene I chose highlighted the violence and conflict, and I realized that it may lead the audience to form stereotypes about Somalia. 
+
+        </div>
+
+        <div class="arrow">
+            ↓
+        </div>
+
+        <div class="process-step">
+
+            <strong>
+                Emotional Appeal
+            </strong>
+
+            When I saw the scene, the stressed locals holding their children made me feel empathy and sadness. This feeling is what is intended by the news reporters.
+
+        </div>
+
+        <div class="arrow">
+            ↓
+        </div>
+
+        <div class="process-step">
+
+            <strong>
+                Visual Footage
+            </strong>
+
+            I looked at the scene and saw the women and children, along with the ruins. I think that this is an intentional choice by the news reporters to create a feeling of fear and sadness.
+
+        </div>
+
+        <div class="arrow">
+            ↓
+        </div>
+
+        <div class="process-step">
+
+            <strong>
+                Credibility of Sources
+            </strong>
+
+            As the news was published by BBC and had local citizens involved, I thought that the news was trustworthy. Despite that, the lack of other perspectives shown made me feel like the audience will only hear one side of the story. 
+
+        </div>
+
+        <div class="arrow">
+            ↓
+        </div>
+
+        <div class="process-step">
+
+            <strong>
+                The Overall Media Bias
+            </strong>
+
+            After analyzing all of the different media framing elements, I came to the conclusion that negative media framing is indeed present in this clip, affecting the audience's perception.
+
+        </div>
+
+    </div>
+
+
+    <div class="assessment reverse">
+
+        <div class="assessment-info">
+
+            <span class="label">
+                Formative Assessment 02
+            </span>
+
+            <h3>
+                What Changed?
+            </h3>
+
+            <p>
+
+                While the first task was more about the different perspectives on the same media coverage, this one was about the different elements of media bias.
+                This assessment made me think deeply about how media can change and affect our understanding of different things without necessarily lying or being dishonest.
+            </p>
+
+
+            <div class="reflection">
+
+                <h4>
+                    What I Realized
+                </h4>
+
+                <p class="quote">
+
+                    "The way a story is told becomes the story we believe."
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <!--
+                ASSIGNMENT 2 PDF
+
+                Put "assignment2.pdf" in the same
+                folder as this HTML file.
+            -->
+
+            <div class="assignment-file">
+
+                <iframe
+                    src="Matthew%20Kusnanto%20-%20Grade%2010_%20Media%20Bias%20Analysis.pdf"
+                    title="Assignment 2 PDF">
+                </iframe>
+
+                <div class="pdf-caption">
+
+                    <span>
+                        FILE 02
+                    </span>
+
+                    — assignment2.pdf
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ASSESSMENT 3
+========================================================= -->
+
+<section id="assessment3">
+
+    <div class="section-header">
+
+        <div class="section-number">
+            03 / ASSESSMENT
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                Case Closed.
+            </h2>
+
+            <p class="section-description">
+
+                The final assessment:
+                what can I do now that I couldn't do before?
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <div class="assessment-info">
+
+            <span class="label">
+                Formative Assessment 03
+            </span>
+
+            <h3>
+                The Final Test
+            </h3>
+
+            <p>
+
+                Explain what this assessment required
+                and what made it challenging.
+
+            </p>
+
+
+            <div class="pee">
+
+                <div class="pee-row point">
+
+                    <strong>
+                        Point
+                    </strong>
+
+                    The Guardian uses critical language and selection of information to portray Charlie Kirk in a negative light, making the article biased against him.
+
+                </div>
+
+                <div class="pee-row evidence">
+
+                    <strong>
+                        Evidence
+                    </strong>
+
+                    The article describes Kirk using words such as "polarizing", "misinformation", "racist", "silence others", and "hate-inflicted speech". Besides that, the article focuses heavily on the contreversies surrounding Kirk, paying little attention to his career achievements and positive contributions.
+
+                </div>
+
+                <div class="pee-row explanation">
+
+                    <strong>
+                        Explanation
+                    </strong>
+
+                    These words have negative connotations and can influence readers to associate Kirk with negative and harmful behaviour. At the same time, giving less attention to other parts of his career means readers have an imbalanced picture of his life.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <!--
+                ASSIGNMENT 3 PDF
+
+                Put "assignment3.pdf" in the same
+                folder as this HTML file.
+            -->
+
+            <div class="assignment-file">
+
+                <iframe
+                    src="assignment3.pdf"
+                    title="Assignment 3 PDF">
+                </iframe>
+
+                <div class="pdf-caption">
+
+                    <span>
+                        FILE 03
+                    </span>
+
+                    — assignment3.pdf
+
+                </div>
+
+            </div>
+
+
+            <div class="reflection">
+
+                <h4>
+                    My Reflection
+                </h4>
+
+                <p>
+
+                    In the first Circle of Viewpoints presentation, as I was new to the topic, I wasn't very confident in my ability to analyze the news, but through the learning journey, I managed to create a Ted-style talk that can explain media bias through a news article about Charlie Kirk. Through this assessment, I can now be more analytical and confident in sharing my perspective of how media bias affects how we view a story.
+
+                </p>
+
+                <br>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROGRESS
+========================================================= -->
+
+<section id="progress">
+
+    <div class="section-header">
+
+        <div class="section-number">
+            04 / PROGRESS
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                The Progress Report
+            </h2>
+
+            <p class="section-description">
+
+                These are how my skills developed and improved throughout the unit.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="progress-grid">
+
+        <div class="skill">
+
+            <div class="skill-name">
+                Making Points
+            </div>
+
+            <div class="stars">
+
+                <span class="before">
+                    ★★
+                </span>
+
+                <span class="after">
+                    ★★★
+                </span>
+
+            </div>
+
+            <small>
+                Beginning → Now
+            </small>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-name">
+                Finding Evidence
+            </div>
+
+            <div class="stars">
+
+                <span class="before">
+                    ★★
+                </span>
+
+                <span class="after">
+                    ★★★★
+                </span>
+
+            </div>
+
+            <small>
+                Beginning → Now
+            </small>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-name">
+                Media Analysis
+            </div>
+
+            <div class="stars">
+
+                <span class="before">
+                    ★★★
+                </span>
+
+                <span class="after">
+                    ★★★★★
+                </span>
+
+            </div>
+
+            <small>
+                Beginning → Now
+            </small>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-name">
+                Communication of Ideas
+            </div>
+
+            <div class="stars">
+
+                <span class="before">
+                    ★★★
+                </span>
+
+                <span class="after">
+                    ★★★★
+                </span>
+
+            </div>
+
+            <small>
+                Beginning → Now
+            </small>
+
+        </div>
+
+
+        <div class="skill">
+
+            <div class="skill-name">
+                Critical Thinking
+            </div>
+
+            <div class="stars">
+
+                <span class="before">
+                    ★★
+                </span>
+
+                <span class="after">
+                    ★★★★
+                </span>
+
+            </div>
+
+            <small>
+                Beginning → Now
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="reflection">
+
+        <h4>
+            How did I improve?
+        </h4>
+
+        <p class="quote">
+            Practice, Feedback & Revision
+        </p>
+
+        <p style="margin-top:20px; max-width:700px;">
+
+            After practicing multiple times throughout different tasks, I managed to improve my skills. Also, for the final presentation, my friend and teacher's feedback helped me to present better. After listening to the feedback, I revised and practiced more so I could get the best result possible.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BEST PART OF LEARNING
+========================================================= -->
+
+<section>
+
+    <div class="section-header">
+
+        <div class="section-number">
+            05 / BEST PARTS OF LEARNING
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                Three Best Parts of Learning
+            </h2>
+
+            <p class="section-description">
+
+                Learning makes you realize that there is more to the story.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="perspective-grid">
+
+        <div class="perspective">
+
+            <div class="perspective-icon">
+                👀
+            </div>
+
+            <h3>
+                Seeing Different Perspectives
+            </h3>
+
+            <p>
+
+                We can understand how the same news story can be viewed in different ways, whether it be the subjects of the news, the reporter or general audiences.
+
+            </p>
+
+        </div>
+
+
+        <div class="perspective">
+
+            <div class="perspective-icon">
+                🔍
+            </div>
+
+            <h3>
+                Investigating Media
+            </h3>
+
+            <p>
+
+                I can find the hidden choices behind a story, such as what gets included, emphasized or left out, which can completely change the message. 
+            
+            </p>
+
+        </div>
+
+
+        <div class="perspective">
+
+            <div class="perspective-icon">
+                📰
+            </div>
+
+            <h3>
+                Applying it to real news
+            </h3>
+
+            <p>
+
+                I can identfiy bias in real news stories, which can help me make better judgements and not believe everything I see at face-value.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL REFLECTION
+========================================================= -->
+
+<section id="final" class="final">
+
+    <div class="section-header">
+
+        <div class="section-number">
+            06 / FINAL EDITION
+        </div>
+
+        <div>
+
+            <h2 class="section-title">
+                The Final Edition
+            </h2>
+
+            <p class="section-description">
+                Looking back at the entire journey.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="final-quote">
+
+        FROM<br>
+
+        <span>
+            ANSWERS
+        </span>
+
+        <br>
+
+        TO<br>
+
+        <span>
+            ARGUMENTS.
+        </span>
+
+    </div>
+
+
+    <div class="reflection-box">
+
+        <h3>
+            My Biggest Learning Achievement
+        </h3>
+
+        <p>
+
+            Throughout this unit, I learned that understanding a news story is not just about knowing what happened, but it's also about how it's presented. I learned this by doing activities such as Circle of Viewpoints, the Media Bias assessment and the final Ted-style talk.
+            <br><br>
+            As a student, I've become more questioning and analytical. Instead of instantly accepting information, I now think about the evidence behind it and how it might affect the audience. I have also become more confident in explaining my ideas and supporting them with evidence.
+            <br><br>
+            Going forward, I will take this mindset into future English lessons. I want to look beyond the surface-level of texts, question what I read and see, and become more thoughtful about how I communicate my own ideas.
+
+        </p>
+
+        <br>
+
+    </div>
+
+
+    <div class="avengers-divider">
+
+        <div class="avengers-symbol">
+            A
+        </div>
+
+    </div>
+
+
+    <div style="
+        text-align:center;
+        font-family:'Oswald', sans-serif;
+        letter-spacing:3px;
+        color:#888;
+        font-size:0.75rem;
+    ">
+
+        MISSION COMPLETE • UNTIL THE NEXT CHAPTER
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <span>
+        The English Times
+    </span>
+
+    <span>
+        Matthew Kusnanto • 10.7
+    </span>
+
+    <span class="footer-arc">
+
+        <span class="arc-reactor"></span>
+
+        END OF ISSUE 01
+
+    </span>
+
+</footer>
+
+
+</body>
+</html>
